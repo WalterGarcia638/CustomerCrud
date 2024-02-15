@@ -47,8 +47,6 @@ You can then execute your native executable with: `./target/banreservas-api-1.0.
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
 
-## Related Guides
-
 ## Estructura del Proyecto y Decisiones de Diseño
 
 ### 1. Domain.Entities
