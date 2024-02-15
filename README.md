@@ -86,4 +86,8 @@ If you want to learn more about building native executables, please consult http
 - **Decisiones de Diseño:**
   - **Interfaces RESTful:** Se eligió por su amplia adopción, facilidad de uso e integración con diferentes clientes (web, móvil, sistemas externos).
   - **Documentación API:** Uso de OpenAPI para documentar los endpoints, facilitando la integración y el consumo de los servicios por parte de los clientes.
+ 
+## Diagrama de arquitectura
+![Diagrama de arquitectura](https://github.com/WalterGarcia638/CustomerCrud/assets/46503881/e62eb7a2-87d6-4985-a4cf-f2f2d6097927)
+
 
