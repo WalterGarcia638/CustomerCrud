@@ -90,4 +90,6 @@ If you want to learn more about building native executables, please consult http
 ## Diagrama de arquitectura
 ![Diagrama de arquitectura](https://github.com/WalterGarcia638/CustomerCrud/assets/46503881/e62eb7a2-87d6-4985-a4cf-f2f2d6097927)
 
+## Diagrama de estructura del proyecto
+![DiagramaEstructura](https://github.com/WalterGarcia638/CustomerCrud/assets/46503881/875a5e70-787b-4e74-af4a-99d04a14dbb7)
 
