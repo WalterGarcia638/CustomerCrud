@@ -6,12 +6,14 @@ import java.util.Map;
 
 import Domain.Entities.Client;
 import Repository.ClientRepository;
+import Service.ClientService;
 import Service.CountryInfoService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -31,18 +33,16 @@ public class ClientResource {
 	
 	 @Inject
 	    private CountryInfoService countryInfoService;
+	 
+	 @Inject
+	    ClientService clientService;
 	
 	@GET
 	public List<Client> index(){
 		return repo.listAll();
 	}
 	
-	/*@POST
-	public Client insert(Client insertClient) {
-		repo.persist(insertClient);
-		return insertClient;
-	}*/
-	
+	@POST
 	 public Client insert(Client insertClient) {
 	        // Obtener el país del cliente
 	        String countryCode = insertClient.getCountry();
@@ -106,64 +106,17 @@ public class ClientResource {
 
 	        return response;
 	    }
-	
-	/*@GET
-	public Response createClient() { // Se ha removido el parámetro Client ya que no se usa
-	    Client client = clientService.getClient(); // Obteniendo el Client del servicio
-	    return Response.status(Response.Status.CREATED).entity(client).build();
-	}*/
-	
-
-    /*@POST
-    public Response createClient(Client client) {
-        clientService.createClient(client);
-        return Response.status(Response.Status.CREATED).entity(client).build();
-    }
-
-    @GET
-    public List<Client> getAllClients() {
-        return clientService.getAllClients();
-    }
-
-    @GET
-    @Path("/country/{countryCode}")
-    public List<Client> getClientsByCountry(@PathParam("countryCode") String countryCode) {
-        return clientService.getClientsByCountry(countryCode);
-    }
-
-    @GET
-    @Path("/{id}")
-    public Client getClientById(@PathParam("id") Long id) {
-        return clientService.getClientById(id);
-    }
-
-    @PUT
-    @Path("/{id}")
-    public Client updateClient(@PathParam("id") Long id, Client client) {
-        return clientService.updateClient(id, client);
-    }
-
-    @DELETE
-    @Path("/{id}")
-    public Response deleteClient(@PathParam("id") Long id) {
-        clientService.deleteClient(id);
-        return Response.status(Response.Status.NO_CONTENT).build();
-    }*/
-	
-	/*@GET
-	public Client getClient() 
-	{
-		 return new Client(
-			        "John", // Suponiendo que este es el nombre, aunque no se menciona en tu fragmento original
-			        "Doe", // Apellido (lastName) - REQUERIDO
-			        "Smith", // Segundo apellido (secondLastName) - OPCIONAL
-			        "johndoe@example.com", // Email - REQUERIDO
-			        "123 Example Street, Example City", // Dirección (address) - REQUERIDO
-			        "+1234567890", // Teléfono (phone) - REQUERIDO
-			        "US", // País (country), usando código ISO 3166 - REQUERIDO
-			        "American" // Nacionalidad (nationality) - Asumiendo que es opcional ya que no se especifica
-			        , null
-			    );
-	}*/
-	
+	 
+	 @PATCH
+	    @Path("/{id}")
+	    @Consumes(MediaType.APPLICATION_JSON)
+	    public Response updateClient(@PathParam("id") Long id, Client clientData) {
+	        Client updatedClient = clientService.updateClient(id, clientData.getEmail(), clientData.getAddress(), clientData.getPhone(), clientData.getCountry());
+	        if (updatedClient != null) {
+	            return Response.ok(updatedClient).build();
+	        } else {
+	            return Response.status(Response.Status.NOT_FOUND).build();
+	        }
+	    }
+	 
 }
